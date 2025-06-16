@@ -1,5 +1,5 @@
 
-import {cart} from "../data/cart.js";
+import {cart, addToCart} from "../data/cart.js";
 import { products } from "../data/products.js";
 
 
@@ -60,11 +60,28 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+function updateCartQuantity() {
+  // ✅ Update cart quantity display.
+
+  let cartQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
     //const productId = button.dataset.productId;
     const {productId} = button.dataset;
+
+    addToCart(productId, button);
+
+    updateCartQuantity();
 
     /* 
       Steps to add product in a cart
@@ -74,41 +91,6 @@ document.querySelectorAll('.js-add-to-cart')
       3. if it is not in the cart, add it to the cart.
 
     */
-
-    const container = button.closest('.product-container'); // gives you the specific product block that contains the button and the dropdown — so you can grab the correct quantity selected.
-    const quantitySelector = container.querySelector('.js-quantity-selector');
-    const quantity = Number(quantitySelector.value);
-
-    
-    let matchingItem; // we use this variable to save the product which is already  in the cart.
-
-    cart.forEach((item) => { // item will contain the name and quantity of product.
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if(matchingItem){
-      matchingItem.quantity += quantity;
-    }
-
-    else{
-      cart.push({
-      //productId: productId,
-      //quantity: quantity
-      productId,
-      quantity
-    });
-    }
-
-    let cartQuantity = 0;
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    });
-
-   
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-    
     
     const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
     addedMessage.classList.add('added-to-cart-visible');
