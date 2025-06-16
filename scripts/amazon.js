@@ -1,7 +1,7 @@
 
 import {cart, addToCart} from "../data/cart.js";
 import { products } from "../data/products.js";
-
+import {formatCurrency} from "./utils/money.js";
 
 let productsHTML = ''; // this will combines all codes together after we loop each product 
 products.forEach((product) => {
@@ -25,12 +25,12 @@ products.forEach((product) => {
       </div>
 
       <div class="product-price">
-        ${(product.priceCents / 100).toFixed(2)}
+        ${formatCurrency(product.priceCents)}
       </div>
 
       <div class="product-quantity-container">
         <select class="js-quantity-selector">
-          <option selected value="1">1</option>
+          <option value="1" selected>1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
@@ -80,8 +80,8 @@ document.querySelectorAll('.js-add-to-cart')
     const {productId} = button.dataset;
 
     addToCart(productId, button);
-
     updateCartQuantity();
+    
 
     /* 
       Steps to add product in a cart

@@ -14,11 +14,16 @@ export const cart = [
   },
 ];
 
+
+
+
+
 export function addToCart(productId, button) {
 
   const container = button.closest('.product-container'); // gives you the specific product block that contains the button and the dropdown — so you can grab the correct quantity selected.
   const quantitySelector = container.querySelector('.js-quantity-selector');
-  const quantity = Number(quantitySelector.value);
+  let quantity = Number(quantitySelector.value);
+  console.log("Selected quantity:", quantity);
   
   let matchingItem; // we use this variable to save the product which is already  in the cart.
 
@@ -40,5 +45,6 @@ export function addToCart(productId, button) {
     quantity
   });
   }
+  
   
 }
