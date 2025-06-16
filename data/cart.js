@@ -1,4 +1,4 @@
-export const cart = [
+export let cart = [
   /*
     The reason why we use productId to search for product 
     inside product array and then we can get all properties of product. 
@@ -46,5 +46,23 @@ export function addToCart(productId, button) {
   });
   }
   
-  
+}
+
+export function removeFromCart (productId) {
+  /*
+    steps to remove product from the cart
+    -------------------------------------
+    1. create new array
+    2. loop through the cart
+    3. add each product to the new array, except for this productId
+  */
+
+  const newCart = [];
+
+  cart.forEach((cartItem) => {
+    if(cartItem.productId !== productId) {
+      newCart.push(cartItem);
+    }
+  });
+  cart = newCart;
 }
