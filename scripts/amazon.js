@@ -1,4 +1,8 @@
 
+import {cart as myCart} from "../data/cart.js";
+ 
+const cart = [];
+
 let productsHTML = ''; // this will combines all codes together after we loop each product 
 products.forEach((product) => {
   productsHTML +=`
@@ -25,7 +29,7 @@ products.forEach((product) => {
       </div>
 
       <div class="product-quantity-container">
-        <select>
+        <select class="js-quantity-selector">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -41,13 +45,13 @@ products.forEach((product) => {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
+      <div class="added-to-cart js-added-to-cart-${product.id} ">
         <img src="images/icons/checkmark.png">
         Added
       </div>
 
       <button class="add-to-cart-button button-primary 
-      js-add-to-cart" data-product-name= "${product.id}">
+      js-add-to-cart" data-product-id= "${product.id}">
         Add to Cart
       </button>
     </div>
@@ -59,7 +63,8 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
-    const productId = button.dataset.productId;
+    //const productId = button.dataset.productId;
+    const {productId} = button.dataset;
 
     /* 
       Steps to add product in a cart
@@ -67,7 +72,13 @@ document.querySelectorAll('.js-add-to-cart')
       1. check if the product is already in the cart.
       2. if it is in the cart, increase the quantity.
       3. if it is not in the cart, add it to the cart.
+
     */
+
+    const container = button.closest('.product-container'); // gives you the specific product block that contains the button and the dropdown — so you can grab the correct quantity selected.
+    const quantitySelector = container.querySelector('.js-quantity-selector');
+    const quantity = Number(quantitySelector.value);
+
     
     let matchingItem; // we use this variable to save the product which is already  in the cart.
 
@@ -78,13 +89,15 @@ document.querySelectorAll('.js-add-to-cart')
     });
 
     if(matchingItem){
-      matchingItem.quantity += 1;
+      matchingItem.quantity += quantity;
     }
 
     else{
       cart.push({
-      productId: productId,
-      quantity: 1
+      //productId: productId,
+      //quantity: quantity
+      productId,
+      quantity
     });
     }
 
@@ -96,6 +109,15 @@ document.querySelectorAll('.js-add-to-cart')
    
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
     
+    
+    const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
+    addedMessage.classList.add('added-to-cart-visible');
+
+      setTimeout(() => {
+        addedMessage.classList.remove('added-to-cart-visible');
+      }, 2000);
+
+
     });
   });
 
@@ -117,5 +139,12 @@ document.querySelectorAll('.js-add-to-cart')
     to all the data-* attributes set on that element. These data-* attributes
     are used to store extra information directly on HTML elements without using classes or IDs.
     The attribute names are converted from kebab-case (data-user-id) to camelCase (dataset.userId
+    
 
+    Modules
+    --------
+    1. prevent naming conflict.
+    2. in order the modules works, we need to use live server.
+    3. We don't have to worry about order of files when we are using modules.
+    3, is better way to organize files.
   */
