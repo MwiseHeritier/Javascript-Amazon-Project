@@ -19,7 +19,7 @@ cart.forEach((cartItem) => { // cartItem is the product we search for
 
 
   cartSummaryHTML += `
-    <div class="cart-item-container">
+    <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
         Delivery date: Tuesday, June 21
       </div>
@@ -110,8 +110,11 @@ document.querySelectorAll('.js-delete-link') // we selected all delete link on t
         1. Remove the product from the cart.
         2, update the HTML
       */
-     const productId = link.dataset.productId
-     removeFromCart(productId);
-     console.log(cart);
+      const productId = link.dataset.productId; // we can use productId to select special class.
+
+      removeFromCart(productId);
+     
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
+      container.remove();
     })
   });
