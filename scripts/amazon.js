@@ -1,7 +1,7 @@
 
-import {cart as myCart} from "../data/cart.js";
- 
-const cart = [];
+import {cart} from "../data/cart.js";
+import { products } from "../data/products.js";
+
 
 let productsHTML = ''; // this will combines all codes together after we loop each product 
 products.forEach((product) => {
