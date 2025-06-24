@@ -182,7 +182,7 @@ function renderOrderSummary() { // the word render means to display on the page(
          like  what we did above we are gonna rerun all this code and regenerate all the HTML*/ 
         renderOrderSummary(); // a function can call it self or re-run it self this is called 'recursion'
         //By recalling renderOrderSummary(), you're telling the browser:
-        //“Hey, the data has changed. Let’s rebuild the HTML to reflect that.”
+
 
      }); 
     });

@@ -184,7 +184,7 @@ function renderOrderSummary() { // the word render means to display on the page(
         //By recalling renderOrderSummary(), you're telling the browser:
         //“Hey, the data has changed. Let’s rebuild the HTML to reflect that.”
 
-     }); 
+    }); 
     });
 }
 
