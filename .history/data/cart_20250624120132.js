@@ -86,7 +86,7 @@ export function removeFromCart (productId) {
   saveToStorage();
 }
 
-export function updateDeliveryOption (productId, deliveryOptionId){// when we update delivery option we need to know the product that we want to update and delivery option we chose
+function updateDeliveryOption (productId, deliveryOptionId){// when we update delivery option we need to know the product that we want to update and delivery option we chose
   /*
     steps
     ----
@@ -100,9 +100,5 @@ export function updateDeliveryOption (productId, deliveryOptionId){// when we up
       matchingItem = cartItem;
     }
   });
-
-  matchingItem.deliveryOptionId = deliveryOptionId;
-  
-  saveToStorage();
 
 }

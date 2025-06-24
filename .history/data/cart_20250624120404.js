@@ -86,7 +86,7 @@ export function removeFromCart (productId) {
   saveToStorage();
 }
 
-export function updateDeliveryOption (productId, deliveryOptionId){// when we update delivery option we need to know the product that we want to update and delivery option we chose
+function updateDeliveryOption (productId, deliveryOptionId){// when we update delivery option we need to know the product that we want to update and delivery option we chose
   /*
     steps
     ----
@@ -97,11 +97,11 @@ export function updateDeliveryOption (productId, deliveryOptionId){// when we up
 
   cart.forEach((cartItem) => { // item will contain the name and quantity of product.
     if (productId === cartItem.productId) {
-      matchingItem = cartItem;
+       matchingItem = cartItem;
     }
   });
 
-  matchingItem.deliveryOptionId = deliveryOptionId;
+  matchingItem.deliveryOptionId == deliveryOptionId;
   
   saveToStorage();
 

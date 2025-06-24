@@ -1,4 +1,4 @@
-import {cart, removeFromCart, updateDeliveryOption} from "../data/cart.js";
+import {cart, removeFromCart} from "../data/cart.js";
 import{products} from "../data/products.js" // to search inside the product array we need to import products into checkout.js
 
 import {formatCurrency} from "./utils/money.js";
@@ -109,9 +109,7 @@ function deliveryOptionsMTML (matchingProduct, cartItem){
   const isChecked = deliveryOption.id === cartItem.deliveryOptionId; 
 
   html +=`
-    <div class="delivery-option js-delivery-option"
-      data-product-id = "${matchingProduct.id}"
-      data-delivery-option-id ="${deliveryOption.id}">
+    <div class="delivery-option js-delivery-option">
       <input type="radio"
         ${isChecked ? 'checked': ''}
         class="delivery-option-input"
@@ -169,12 +167,7 @@ document.querySelectorAll('.js-delete-link') // we selected all delete link on t
 
 document.querySelectorAll('.js-delivery-option')
   .forEach((element) =>{
-    element.addEventListener('click', () =>{
-      const{productId, deliveryOptionId} = element.dataset;
-      //const productId = element.dataset.productId;
-      //const deliveryOptionId = element.dataset.deliveryOptionId
-      updateDeliveryOption(productId, deliveryOptionId)
-    });
+    element.addEventListener('click')
   });
 
  /*

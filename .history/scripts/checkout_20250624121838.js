@@ -171,8 +171,7 @@ document.querySelectorAll('.js-delivery-option')
   .forEach((element) =>{
     element.addEventListener('click', () =>{
       const{productId, deliveryOptionId} = element.dataset;
-      //const productId = element.dataset.productId;
-      //const deliveryOptionId = element.dataset.deliveryOptionId
+      const productId = element.dataset.product
       updateDeliveryOption(productId, deliveryOptionId)
     });
   });
